@@ -1,0 +1,8 @@
+For this class, we have a specific method for submission and determining if your submission was on-time or not. Do not forget this. An assignment is submitted once two things are true:
+
+1. It is past the due date and time.
+2. The default branch (master/main) has a file named readyToSubmit.txt in the top level directory (not inside any folders). Other branches are fine if you wish to use them, but only the default branch will be graded. If you're unfamiliar with git and don't understand what that means, don't worry, everything will be in the correct branch.
+
+We use the existence of readyToSubmit.txt to check that the assignment is finished, and we use the timestamp of the last commit to determine late penalty (if any).
+
+What if you modify the default branch after uploading readyToSubmit.txt? If it's before the due date and time, that's fine, go ahead. If the assignment is past-due and you absolutely must modify your submission, please send Braden an email as soon as possible. We may (at our discretion) allow you to update your submission, with any applicable change to the late penalty. If you accidentally push a commit to your repository after submission and that would add to your late penalty, send an email, we can (at our discretion) grade a previous commit to reduce your late penalty. Always contact us as quickly as you can -- if we've already graded a submission, we may choose not to grade it a second time.
