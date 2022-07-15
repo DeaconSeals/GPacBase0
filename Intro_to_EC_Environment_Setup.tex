@@ -1,0 +1,170 @@
+\documentclass{article}
+\usepackage{fullpage,algorithmic,verbatim,graphicx,url,tikz,enumitem,soul,listings}
+\usepackage{hyperref}
+%\usepackage{ulem} %For strike-through text
+
+\hypersetup{
+  linkcolor  = blue,
+  citecolor  = blue,
+  urlcolor   = blue,
+  colorlinks = true,
+}
+
+\graphicspath{ {./images/} }
+
+\title{Evolutionary Computing\\
+        COMP 5660-001/6660-001/6666-V01 -- Auburn University\\
+        Fall 2021 -- Python Environment Setup Guide}
+\author{Nathaniel Kamrath\\
+Braden Tisdale \\
+Deacon Seals \\
+Daniel Tauritz, Ph.D.}
+
+\begin{document}
+\maketitle
+
+\section{Overview}
+The recommended development environment setup for this course is detailed in the sections below.  Students will need to choose to use either Windows Subsystem for Linux (WSL) or create a virtual machine using VirtualBox.  Both options will result in a good experience and it is up to the student to pick which method they prefer.  In either case, a Ubuntu 20.04 environment will be created and Anaconda will be setup to provide python package management.
+
+\section{Virtualization Tech Setup}
+Follow either \hyperref[sec:wsl]{Windows Subsystem for Linux} or \hyperref[sec:vb]{VirtualBox} setup guides in this section.
+\subsection{Windows Subsystem for Linux (WSL)} \label{sec:wsl}
+For more information on setting up WSL, please read the official installation documentation from Microsoft:
+\url{https://docs.microsoft.com/en-us/windows/wsl/install-win10}.\\
+
+After setting up WSL, please skip to \hyperref[sec:anacondasetup]{Section 3: Anaconda Setup}
+
+\subsection{VirtualBox} \label{sec:vb}
+First, download the Ubuntu 20.04 Desktop installation image: \url{https://ubuntu.com/download/desktop}\\
+
+Visit the following page to download the VirtualBox installer that is appropriate for the target machine: \url{https://www.virtualbox.org/wiki/Downloads}\\
+
+Once VirtualBox is installed, a new virtual machine instance must be crated.  After launching VirtualBox, click the "New" button.
+
+\begin{center}
+\includegraphics[scale=0.4]{vb_new}
+\end{center}
+
+Use the following dialog to select an appropriate name and storage location for the new vitual machine.  Use this dialog to select Linux Ubuntu (64-bit) as the Type and Version as shown here.
+
+\begin{center}
+\includegraphics[scale=0.6]{vb_name}
+\end{center}
+
+Next, set the amount of RAM that will be allocated to the virtual machine.  A minimum of 1 GB is recommended.  However, if the target machine has enough RAM to allow for a higher setting, 2-4 GB can allow the virtual machine to be more effective.  This setting can also be changed after setup at any time as long as the virtual machine is powered down.
+
+\begin{center}
+\includegraphics[scale=0.6]{vb_ram}
+\end{center}
+
+The next step will be to create a new virtual hard disk.
+
+\begin{center}
+\includegraphics[scale=0.6]{vb_new_disk}
+\end{center}
+
+Use the default setting of VDI (VirtualBox Disk Image)
+
+\begin{center}
+\includegraphics[scale=0.6]{vb_disk_type}
+\end{center}
+
+Next, select how storage will be allocated on the physical disk.  It is recommended to use the default option of Dynamic allocation, but if a fixed size is desired that option can be selected as well.
+
+\begin{center}
+\includegraphics[scale=0.6]{vb_size_type}
+\end{center}
+
+Select the desired location and size for the virtual hard disk.  If a dynamic allocation method was selected in the previous step, this setting will be used to limit the maximum size of the virtual drive (allocation will take place as needed up to the selected size).  If a fixed size was selected, the size entered here will be immediately reserved on the physical drive.  The minimum recommended size is 20 GB.
+
+\begin{center}
+\includegraphics[scale=0.6]{vb_disk_loc}
+\end{center}
+
+At this point the virtual machine setup will be complete.  However, the Linux Ubuntu operating system must still be installed.  Select the new virtual machine and click the settings button.
+
+\begin{center}
+\includegraphics[scale=0.4]{vb_settings}
+\end{center}
+
+Use the settings menu to select Storage from the left hand menu.  Next, select the currently empty device under the IDE controller.  Then, click the CD icon and click the option to choose a disk file to select a disk which will be loaded into the virtual drive.  Use the file browser dialog to select the Ubuntu 20.04 Desktop image that was downloaded earlier.
+
+\begin{center}
+\includegraphics[scale=0.5]{images/vb_select_disk.jpg}
+\end{center}
+
+The Storage dialog should now show that the ubuntu image is loaded into the IDE controller's virtual disk drive.  Click ok to close the settings dialog.
+
+\begin{center}
+\includegraphics[scale=0.5]{images/vb_ubuntu_loaded.jpg}
+\end{center}
+
+The virtual machine can now be powered on.  Click the start button.
+
+\begin{center}
+\includegraphics[scale=0.5]{images/vb_start}
+\end{center}
+
+The virtual machine will start up and boot from the selected Ubuntu Desktop image found in the virtual disk drive.  Click the Install Ubuntu button.
+
+\begin{center}
+\includegraphics[scale=0.4]{images/vb_ubuntu_install_boot.jpg}
+\end{center}
+
+Select the desired keyboard layout for the virtual machine.
+
+\begin{center}
+\includegraphics[scale=0.4]{images/vb_ubuntu_kb_layout.jpg}
+\end{center}
+
+Use the default values for the updates and other software options
+
+\begin{center}
+\includegraphics[scale=0.4]{images/vb_ubuntu_updates.jpg}
+\end{center}
+
+Next, instruct the installer to erase the entire disk.  This will only erase the virtual disk (none of the host system files will be erased).  Click the Install Now button and then select Continue from the following dialog to begin the installation process.
+
+\begin{center}
+\includegraphics[scale=0.4]{images/vb_ubuntu_erase_disk.jpg}
+\end{center}
+
+Follow the prompts to select an appropriate time zone and configure a user and password for the virtual machine's guest operating system.  When the installation is complete, click the Restart Now button.
+
+\begin{center}
+\includegraphics[scale=0.4]{images/vb_ubuntu_complete.jpg}
+\end{center}
+
+At this point, the installer will pause to give the user time to remove the installation disk.  VirtualBox usually handles this automatically, but to verify the ubuntu disk has been removed, click Devices then Optical Devices and ensure there is no check mark next to the ubuntu disk image.  If there is a check mark, click the disk image menu option and select force unmount.  Hit the enter key to reboot the machine.
+
+\begin{center}
+\includegraphics[scale=0.4]{images/vb_ubuntu_unmount.jpg}
+\end{center}
+
+Upon rebooting, the login screen with the configured user name should appear.  If the ubuntu installation menu appears again, it will need to be removed manually through the settings dialog.  Shutdown the machine.  Using the menu select Machine then ACPI Shutdown.
+
+\begin{center}
+\includegraphics[scale=0.4]{images/vb_shutdown.jpg}
+\end{center}
+
+Now that the machine is powered off, use the VirtualBox settings menu to remove the ubuntu installation disk image.
+
+\begin{center}
+\includegraphics[scale=0.4]{images/vb_remove_disk.jpg}
+\end{center}
+
+Now that the disk has been removed, close the settings dialog and start the virtual machine again.
+
+\section{Anaconda Setup} \label{sec:anacondasetup}
+\noindent Use the following terminal commands to download and install Anaconda :\\
+\begin{verbatim}
+  wget https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh
+  chmod 755 ./Anaconda3-2021.05-Linux-x86_64.sh
+  ./Anaconda3-2021.05-Linux-x86_64.sh
+\end{verbatim}
+
+\section{GitHub Setup}
+
+Now we're going to walk through the process of setting up your repository and submitting your assignment. First, sign into your github account (or create a new one). Make sure you have verified your email address. Then, follow this link \url{Insert your GitHub Classroom Link Here} and wait a few seconds until the repository is set up (you need to refresh the page). Follow the instructions in README.md to complete your first assignment. The assignment is due Monday August 23rd at 10:00 PM.
+
+\end{document}
